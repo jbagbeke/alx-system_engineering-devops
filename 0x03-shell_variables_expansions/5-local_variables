@@ -1,2 +1,2 @@
 #!/bin/bash
-(set -o posix; set | grep -vE '^(BASH_|EUID|GROUPS|PIPESTATUS|PPID|UID|_)')
+echo "$(env -pF)"
