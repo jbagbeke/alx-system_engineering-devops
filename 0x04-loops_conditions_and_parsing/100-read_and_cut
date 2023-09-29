@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+#Displays the content of the file /etc/passwd
+
+passwd="/etc/passwd"
+
+while read -r username
+do
+   echo "$username" | cut -d ":" -f1,4,6
+
+done < "$passwd"
