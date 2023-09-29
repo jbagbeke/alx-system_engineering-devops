@@ -3,7 +3,7 @@
 
 for file in *;
 do
-	if [ -f $file ]; then
-		echo $file
+	if [ -f "$file" ]; then
+		echo "$file" | awk -F'-' '{if ($2 != "") print $2; else print $0}'
 	fi
 done
