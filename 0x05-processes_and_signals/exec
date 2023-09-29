@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Adds executable permission to all files
+
+for file in *; do
+	if [[ "${file,,}" == "readme.md" ]]; then
+		continue
+	else
+		chmod u+x "$file"
+	fi
+done
