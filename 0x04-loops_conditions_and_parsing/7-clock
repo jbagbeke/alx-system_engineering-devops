@@ -4,11 +4,15 @@
 minute=0
 hour=0
 
-while [ $hour -le 12 ]
+while [ $hour -le 13 ]
 do
 	if ((minute % 60 == 0)); then
-		echo "Hour: $((minute/60))"
-		((hour++))
+		if [ $hour -eq 13 ]; then
+			break
+		else
+			echo "Hour: $hour"
+			((hour++))
+		fi
 	else
 		echo $minute
 	fi
