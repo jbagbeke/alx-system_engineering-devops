@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Stops 7-highlander process.y
+
+kill -9 "$(pgrep -f "7-highlander")"
