@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # Inserts new location block using stream editor(sed)
 
-sudo sed -i '/location \/ {/i\
+apt-get update
+apt-get install -y nginx
+sed -i '/location \/ {/i\
 	location \/redirect_me {\
 		return 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4\
 	}\
 	' /etc/nginx/sites-available/default
 
-sudo service nginx restart
+service nginx restart
