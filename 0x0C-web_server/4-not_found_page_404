@@ -1,23 +1,14 @@
 #!/usr/bin/env bash
-#Configure your Nginx server to have page not found page
+# Inserts new location block using stream editor(sed)
 
+sudo apt-get update
+sudo apt-get install -y nginx
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+red="location \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}"
+sudo sed -i "/server_name _;/a$red" /etc/nginx/sites-available/default
 
-REDIRECT="\n\tlocation /redirect_me {\n\t\treturn 301 https://youtu.be/dQw4w9WgXcQ;\n\t}\n"
-FILE="/etc/nginx/sites-available/default"
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+not_found="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sudo sed -i "s/listen 80 default_server;/$not_found/" /etc/nginx/sites-available/default
 
-ERRORFILE="/usr/share/nginx/html/404error.html"
-FOUR="Ceci n'est pas une page"
-
-ERRORREDIRECT="\n\terror_page 404 /404error.html;\n\tlocation = /404error.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}\n"
-
-apt-get -y update
-apt-get -y install nginx
-
-ufw allow 'Nginx HTTP'
-sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
-
-sed -i "37i\ $REDIRECT" "$FILE"
-echo "$FOUR" > "$ERRORFILE"
-sed -i "37i\ $ERRORREDIRECT" "$FILE"
-
-service nginx restart
+sudo service nginx restart
