@@ -9,6 +9,7 @@ sudo sed -i "/server_name _;/a$red" /etc/nginx/sites-available/default
 
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 not_found="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
-sudo sed -i "s/listen 80 default_server;/$not_found/" /etc/nginx/sites-available/default
+
+sudo sed -i "s/listen 80 default_server;/$not_found/" /etc/nginx/sites-enabled/default
 
 sudo service nginx restart
