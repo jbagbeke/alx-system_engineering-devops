@@ -4,10 +4,12 @@
 sudo apt-get update
 sudo apt-get install nginx
 
-ufw allow 80
+sudo ufw allow 'Nginx HTTP'
 
 sudo chmod 775 /var/www
 sudo chmod 775 /var/www/html
+
+sudo mkdir -p /var/www/html/index.html
 
 echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
@@ -15,11 +17,11 @@ sudo sed -i "/server_name _;/a\ \n\tlocation \/redirect_me {\n\t\treturn 301 htt
 
 sudo sed -i "/location \/ {/,/}/ s/try_files \$uri \$uri\/ =404;/try_files \$uri \$uri\/ =404;\n\t\tadd_header 'X-Served-By' \$hostname;/" /etc/nginx/sites-available/default
 
+sudo mkdir -p /var/www/html/404.html
+
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
 
 sudo sed -i "/server_name _;/a\ \n\terror_page 404 /404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}" /etc/nginx/sites-available/default
 
 
 sudo service nginx restart
-
-
