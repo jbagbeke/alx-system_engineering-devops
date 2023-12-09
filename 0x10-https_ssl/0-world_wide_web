@@ -5,12 +5,12 @@ if [ $# -lt 1 ]; then
 	echo "Missing <domain name>"
 fi
 if [ $# -eq 1 ]; then
-	dig www.$1 | awk '/ANSWER SECTION/ { getline; print "The subdomain www is a " $4 " and points to " $5 }'
-	dig lb-01.$1 | awk '/ANSWER SECTION/ { getline; print "The subdomain lb-01 is a " $4 " and points to " $5 }'
-	dig web-01.$1 | awk '/ANSWER SECTION/ { getline; print "The subdomain web-01 is a " $4 " and points to " $5}'
-	dig web-02.$1 | awk '/ANSWER SECTION/ { getline; print "The subdomain web-02 is a " $4 " and points to " $5 }'
+	dig www.$1 | awk '/ANSWER SECTION/ { getline; print "The subdomain www is a " $4 " record and points to " $5 }'
+	dig lb-01.$1 | awk '/ANSWER SECTION/ { getline; print "The subdomain lb-01 is a " $4 " record and points to " $5 }'
+	dig web-01.$1 | awk '/ANSWER SECTION/ { getline; print "The subdomain web-01 is a " $4 " record and points to " $5}'
+	dig web-02.$1 | awk '/ANSWER SECTION/ { getline; print "The subdomain web-02 is a " $4 " record and points to " $5 }'
 fi
 if [ $# -eq 2 ]; then
 	subdom=$2
-	dig $2.$1 | awk -v subdom="$subdom" '/ANSWER SECTION/ { getline; print "The subdomain " subdom " is a " $4 " and points to " $5 }'
+	dig $2.$1 | awk -v subdom="$subdom" '/ANSWER SECTION/ { getline; print "The subdomain " subdom " is a " $4 " record and points to " $5 }'
 fi
