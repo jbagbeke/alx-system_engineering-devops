@@ -34,12 +34,10 @@ defaults
         errorfile 504 /etc/haproxy/errors/504.http
 
 frontend jba_frontend
-        bind *:443
-        mode http
-        option forwardfor
+        bind *:80
+        bind *:443 ssl crt /etc/letsencrypt/live/www.efojba.tech/all.pem
         default_backend jba_backend
 backend jba_backend
-        mode http
         balance roundrobin
         server 237142-web-01 52.91.168.145:80 check
         server 237142-web-02 54.236.17.91:80  check
