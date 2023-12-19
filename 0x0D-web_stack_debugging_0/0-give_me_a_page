@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Return a page containing Hello Holberton when querying the root
+
+echo "Hello Holberton" | sudo tee > /var/www/html/index.html
