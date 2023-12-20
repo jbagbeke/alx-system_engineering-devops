@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Scripts that runs nginx with nginx as user and sets listening ports to 8080
+
+sudo sed -i 's/www-data/nginx/' /etc/nginx/nginx.conf
+sudo sed -i 's/80 dafault_server/8080 default_server/' /etc/nginx/sites-available/default
+
+sudo service nginx restart
