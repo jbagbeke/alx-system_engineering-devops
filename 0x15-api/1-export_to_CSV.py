@@ -25,3 +25,18 @@ if __name__ == '__main__':
                                                     ))
     for resp in done_titles:
         print('\t {}'.format(resp))
+
+    user_id = sys.argv[1]
+    user_name = user_info.get('username')
+    csv_list = []
+
+    for task in response:
+        task_stat = str(task.get('completed'))
+        task_title = task.get('title')
+
+        tmp_list = [user_id, user_name, task_stat, task_title]
+        csv_list.append(tmp_list)
+
+    with open('{}.csv'.format(user_id), 'w') as file:
+        csv_write = csv.writer(file)
+        csv_write.writerows(csv_list)
