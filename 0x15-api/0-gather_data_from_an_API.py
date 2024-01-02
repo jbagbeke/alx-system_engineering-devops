@@ -24,5 +24,3 @@ if __name__ == '__main__':
                                                     ))
     for resp in done_titles:
         print('\t {}'.format(resp))
-
-
