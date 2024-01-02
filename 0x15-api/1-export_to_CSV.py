@@ -38,5 +38,5 @@ if __name__ == '__main__':
         csv_list.append(tmp_list)
 
     with open('{}.csv'.format(user_id), 'w') as file:
-        csv_write = csv.writer(file)
+        csv_write = csv.writer(file, quoting=csv.QUOTE_ALL)
         csv_write.writerows(csv_list)
