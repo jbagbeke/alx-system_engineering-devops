@@ -43,6 +43,5 @@ if __name__ == '__main__':
 
         json_dict.update(user_dict)
 
-
     with open('todo_all_employees.json', 'w') as file:
         json.dump(json_dict, file)
