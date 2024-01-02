@@ -6,24 +6,23 @@ import requests
 import sys
 
 if __name__ == '__main__':
-    url = 'https://jsonplaceholder.typicode.com/{}/{}'
+    url = 'https://jsonplaceholder.typicode.com/users/{1}/{0}'
+    url_two = 'https://jsonplaceholder.typicode.com/users/{}'
 
-    res_one = requests.get(url.format('todos', sys.argv[1]))
-    res_two = requests.get(url.format('users', sys.argv[1]))
+    name = requests.get(url_two.format(sys.argv[1])).json().get('name')
+    response = requests.get(url.format('todos', sys.argv[1]))
+    response = response.json()
 
-    if res_one.status_code == 200 and res_two.status_code == 200:
-        res_one = res_one.json()
-        res_two = res_two.json()
+    done_titles = [res.get('title') for res in response
+                   if res.get('completed') is True
+                   ]
 
-        if res_one['completed'] is True:
-            num = 1
-        else:
-            num = 0
+    print('Employee {} is done with tasks({}/{}):'.format(
+                                                    name,
+                                                    len(done_titles),
+                                                    len(response)
+                                                    ))
+    for resp in done_titles:
+        print('\t {}'.format(resp))
 
-        print('Employee {} is done with tasks({}/20):'.format(
-                                                        res_two['name'],
-                                                        num
-                                                        ))
 
-        if res_one['completed'] is True:
-            print('\t{}'.format(res_one['title']))
