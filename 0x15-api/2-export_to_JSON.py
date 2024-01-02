@@ -31,10 +31,8 @@ if __name__ == '__main__':
     user_name = user_info.get('username')
     csv_list = []
 
-
     # Creating neccessary dict structure for .json dump
     json_dict = {"{}".format(user_id): []}
-
 
     for task in response:
         task_stat = task.get('completed')
@@ -42,7 +40,6 @@ if __name__ == '__main__':
 
         tmp_list = [user_id, user_name, task_stat, task_title]
         csv_list.append(tmp_list)
-
 
         # Creating neccessary json dict for saving
         tmp_dict = {
@@ -53,12 +50,9 @@ if __name__ == '__main__':
 
         json_dict[str(user_id)].append(tmp_dict)
 
-
     with open('{}.csv'.format(user_id), 'w') as file:
         csv_write = csv.writer(file, quoting=csv.QUOTE_ALL)
         csv_write.writerows(csv_list)
 
-
     with open('{}.json'.format(user_id), 'w') as file:
         json.dump(json_dict, file)
-
