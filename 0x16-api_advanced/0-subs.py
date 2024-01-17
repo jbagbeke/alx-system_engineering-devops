@@ -9,13 +9,15 @@ def number_of_subscribers(subreddit):
     """
         Queries REDDIT API and returns # of subscribers with given subreddit
                                                                         """
-    if not subreddit or not isinstance(subreddit, str):
+    if not subreddit:
         return 0
 
     try:
+        user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
+        
         query_url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
 
-        response = requests.get(query_url, allow_redirects=False)
+        response = requests.get(query_url, headers=user_agent, allow_redirects=False)
 
         if 300 <= response.status_code < 400:
             return 0
