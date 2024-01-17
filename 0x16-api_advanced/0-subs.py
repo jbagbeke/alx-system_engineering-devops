@@ -9,6 +9,8 @@ def number_of_subscribers(subreddit):
     """
         Queries REDDIT API and returns # of subscribers with given subreddit
                                                                         """
+    if not subreddit or not isinstance(subreddit, str):
+        return 0
 
     try:
         query_url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
