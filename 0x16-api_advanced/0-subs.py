@@ -12,15 +12,13 @@ def number_of_subscribers(subreddit):
     if not subreddit:
         return 0
 
+    query_url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+
+    response = requests.get(query_url)
+
+    response_data = response.json()
+
     try:
-        query_url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-
-        response = requests.get(query_url)
-
-        if response.status_code == 200:
-            response_data = response.json()
-            return response_data.get('data').get('subscribers')
-
-        return 0
+        return response_data.get('data').get('subscribers')
     except Exception:
         return 0
