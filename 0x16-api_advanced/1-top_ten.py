@@ -13,13 +13,14 @@ def number_of_subscribers(subreddit):
         return 0
 
     user_agent = {'User-agent': 'AlxRedditQuery'}
-    query_url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    query_url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
 
     response = requests.get(query_url, headers=user_agent)
 
     response_data = response.json()
 
     try:
-        return response_data.get('data').get('subscribers')
+        for data in response_data['data']['children'][:10]:
+            print(data['data']['title'])
     except Exception:
         return 0
