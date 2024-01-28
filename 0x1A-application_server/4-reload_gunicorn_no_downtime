@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 # Kill gunicorn worker process gracefully.
-pgrep gunicorn | xargs kill -HUP
+GPID=($(pgrep -f 'gunicorn -w'))
+
+for pid in "${GPID[@]}"; do
+	kill -s HUP "$pid"
+done
