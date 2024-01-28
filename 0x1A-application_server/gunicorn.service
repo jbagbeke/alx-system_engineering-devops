@@ -12,6 +12,8 @@ PIDFile=/tmp/gunicorn.pid
 Restart=on-failure
 Environment="AIRBNB_ERROR_LOG=/tmp/airbnb-error.log"
 Environment="AIRBNB_ACCESS_LOG=/tmp/airbnb-access.log"
+StandardError=append:/tmp/airbnb-error.log
+StandardOutput=append:/tmp/airbnb-access.log
 
 [Install]
 WantedBy=multi-user.target
